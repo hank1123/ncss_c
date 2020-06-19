@@ -1,0 +1,15 @@
+{% extends "user/base.html" %}
+{% block content %}
+
+  <p>用户信息展示:</p>
+    <p>用户:</p>
+      <ul>
+        <li>
+            <p>用户名：{{ user.username }}</p>
+            <p>账号：{{ user.account }}</p>
+            <p>用户角色：{{ user.role_name }}</p>
+            <p>电话：{{ user.phone }}</p>
+        </li>
+      </ul>
+
+{% endblock content %}

@@ -1,0 +1,11 @@
+{% extends "user/base.html" %}
+{% block content %}
+
+  <p>修改用户信息:</p>
+    <form action="{% url 'user:update' %} user_id" method='put'>
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button name="submit">保存修改</button>
+    </form>
+
+{% endblock content %}
