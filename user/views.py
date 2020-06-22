@@ -71,8 +71,7 @@ def login(request):
             user_obj = Users.objects.all().filter(account=account).first()
             ser_obj = UsersSerializer(user_obj)
             if ser_obj.data["password"] == pwd:
-                request.session["id"] = user.id
-                request.session["role_id"] = user.role_id
+                request.session["id"] = ser_obj.data["id"]
                 return HttpResponseRedirect(reverse('user:index'))
     context = {'form': form}
     return render(request, 'user/login.html', context)

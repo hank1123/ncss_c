@@ -1,6 +1,5 @@
-from django.http import HttpResponseRedirect
 from django.utils.deprecation import MiddlewareMixin
-from django.shortcuts import render, redirect, HttpResponse, reverse
+from django.shortcuts import render
 from rest_framework import status
 
 class AuthMD(MiddlewareMixin):  # 验证登录
@@ -9,7 +8,6 @@ class AuthMD(MiddlewareMixin):  # 验证登录
         request_url = request.path_info
 
         if request_url == 'login/' or request.session.get("id"): #要登陆或已登录
-
             return None
         else:
             ret["errMsg"] = "用户未登录"
