@@ -1,13 +1,12 @@
 {% extends "user/base.html" %}
 {% block content %}
-
-  <p>用户信息展示:</p>
-    <p>用户:</p>
+    <p>用户:{{ user }}</p>
+    <a href="{% url 'user:update' user.id %}">修改用户信息</a>
       <ul>
         <li>
             <p>用户名：{{ user.username }}</p>
             <p>账号：{{ user.account }}</p>
-            <p>用户角色：{{ user.role_name }}</p>
+            <p>角色：{{ user.role_name }}</p>
             <p>电话：{{ user.phone }}</p>
         </li>
       </ul>

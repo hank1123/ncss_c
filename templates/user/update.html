@@ -1,8 +1,9 @@
 {% extends "user/base.html" %}
 {% block content %}
-
+  <p><a href="{url 'user:user' user.id}">{{ user.name }}</a></p>
   <p>修改用户信息:</p>
-    <form action="{% url 'user:update' %} user_id" method='put'>
+
+    <form action="{% url 'user:update'  user.id %}" method='post'>
       {% csrf_token %}
       {{ form.as_p }}
       <button name="submit">保存修改</button>

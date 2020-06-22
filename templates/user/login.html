@@ -1,11 +1,14 @@
 {% extends "user/base.html" %}
 {% block content %}
-
+  {% if form.errors %}
+    <p>用户名或密码错误，请重新登陆！</p>
+  {% endif %}
   <p>用户登录:</p>
     <form action="{% url 'user:login' %}" method='post'>
       {% csrf_token %}
       {{ form.as_p }}
-      <button name="submit">提交</button>
+      <button name="submit">登录</button>
+      <input type="hidden" name="next" value="{% url 'user:login' %}"/>
     </form>
 
 {% endblock content %}

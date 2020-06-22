@@ -1,8 +1,11 @@
 <p>
     <a href="{% url 'user:index' %}">首页</a> -
-    <a href="{% url 'user:login' %}">登录</a> -
+    {% if user.is_authenticated %} -
+        hello, {{ user.name }}
+    {% else %}
+        <a href="{% url 'user:login' %}">登录</a> -
+    {% endif %}
     <a href="{% url 'user:insert' %}">新增用户</a> -
-    <a href="{% url 'user:update' %}">修改用户</a> -
     <a href="{% url 'user:users' %}">查询用户</a> -
     <a href="{% url 'user:delete' %}">删除用户</a>
 </p>

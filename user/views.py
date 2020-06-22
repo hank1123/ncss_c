@@ -23,19 +23,6 @@ def insert_user(request):
     context = {'form': form}
     return render(request, 'user/insert.html', context) 
 
-def update_user(request, user_id):
-    user = Users.objects.get(id=user_id)
-    
-    if request.method != 'PUT':
-        form = UserForm(instance=user)
-    else:
-        form = UserForm(instance=user, data=request.POST)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(reverse('user:index'))
-    context = {'form': form}
-    return render(request, 'user/update.html', context)
-
 def delete_user(request):
     pass
     
@@ -58,6 +45,20 @@ def user(request, id):
         
     context = {'user': user}
     return render(request, 'user/user.html', context)
+
+
+def update_user(request, id):
+    user = Users.objects.get(id=id)
+
+    if request.method != 'POST':
+        form = UserForm(instance=user)
+    else:
+        form = UserForm(instance=user, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('user:index'))
+    context = {'form': form, 'user': user}
+    return render(request, 'user/update.html', context)
     
 def login(request):
     if request.method != 'POST':
@@ -70,6 +71,8 @@ def login(request):
             user_obj = Users.objects.all().filter(account=account).first()
             ser_obj = UsersSerializer(user_obj)
             if ser_obj.data["password"] == pwd:
+                request.session["id"] = user.id
+                request.session["role_id"] = user.role_id
                 return HttpResponseRedirect(reverse('user:index'))
     context = {'form': form}
     return render(request, 'user/login.html', context)
